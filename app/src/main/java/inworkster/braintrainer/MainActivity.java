@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     Button startButton;
+    Button playAgain;
     Button button0;
     Button button1;
     Button button2;
@@ -68,6 +69,39 @@ public class MainActivity extends AppCompatActivity {
         button1.setText(Integer.toString(answers.get(1)));
         button2.setText(Integer.toString(answers.get(2)));
         button3.setText(Integer.toString(answers.get(3)));
+
+    }
+
+    public void playAgain(View view){
+
+        score = 0;
+        total = 0;
+
+        timerTextView.setText("0:00");
+        resultTextView.setText("0/0");
+        booleanTextView.setText("");
+        playAgain.setVisibility(View.INVISIBLE);
+
+
+        new CountDownTimer(30100, 1000) {
+
+
+            @Override
+            public void onTick(long l) {
+
+                timerTextView.setText(String.valueOf(l/1000));
+
+            }
+
+            @Override
+            public void onFinish() {
+
+                timerTextView.setText("0:00");
+                booleanTextView.setText("Your score is: " + Integer.toString(score) + "/" + Integer.toString(total));
+                playAgain.setVisibility(View.VISIBLE);
+
+            }
+        }.start();
 
     }
 
@@ -149,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
             booleanTextView.setText("Wrong");
 
         }
-
         generateQuestion();
 
     }
@@ -176,23 +209,7 @@ public class MainActivity extends AppCompatActivity {
         button1 = (Button)findViewById(R.id.button1);
         button2 = (Button)findViewById(R.id.button2);
         button3 = (Button)findViewById(R.id.button3);
-
-        new CountDownTimer(30000, 1000) {
-
-
-            @Override
-            public void onTick(long l) {
-
-
-
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        };
-
+        playAgain = (Button)findViewById(R.id.playAgain);
 
         generateQuestion();
 
