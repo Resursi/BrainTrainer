@@ -2,6 +2,7 @@ package inworkster.braintrainer;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     TextView resultTextView;
     TextView booleanTextView;
     TextView timerTextView;
+    ConstraintLayout gameConstraintLayout;
     int locationOfCorrectAnswer;
     ArrayList<Integer> answers = new ArrayList<Integer>();
     int score = 0;
@@ -77,10 +79,11 @@ public class MainActivity extends AppCompatActivity {
         score = 0;
         total = 0;
 
-        timerTextView.setText("0:00");
+        timerTextView.setText("0s");
         resultTextView.setText("0/0");
         booleanTextView.setText("");
         playAgain.setVisibility(View.INVISIBLE);
+        generateQuestion();
 
 
         new CountDownTimer(30100, 1000) {
@@ -89,14 +92,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTick(long l) {
 
-                timerTextView.setText(String.valueOf(l/1000));
+                timerTextView.setText(String.valueOf(l/1000) + "s");
 
             }
 
             @Override
             public void onFinish() {
 
-                timerTextView.setText("0:00");
+                timerTextView.setText("0s");
                 booleanTextView.setText("Your score is: " + Integer.toString(score) + "/" + Integer.toString(total));
                 playAgain.setVisibility(View.VISIBLE);
 
@@ -191,6 +194,8 @@ public class MainActivity extends AppCompatActivity {
     public void startButton(View view){
 
         startButton.setVisibility(View.INVISIBLE);
+        gameConstraintLayout.setVisibility(ConstraintLayout.VISIBLE);
+        playAgain(findViewById(R.id.playAgain));
 
     }
 
@@ -204,14 +209,13 @@ public class MainActivity extends AppCompatActivity {
         resultTextView = (TextView)findViewById(R.id.scoreTextView);
         booleanTextView = (TextView)findViewById(R.id.booleanTextView);
         timerTextView = (TextView)findViewById(R.id.timerTextView);
+        gameConstraintLayout = (ConstraintLayout)findViewById(R.id.gameConstraintLayout);
 
         button0 = (Button)findViewById(R.id.button0);
         button1 = (Button)findViewById(R.id.button1);
         button2 = (Button)findViewById(R.id.button2);
         button3 = (Button)findViewById(R.id.button3);
         playAgain = (Button)findViewById(R.id.playAgain);
-
-        generateQuestion();
 
     }
 
