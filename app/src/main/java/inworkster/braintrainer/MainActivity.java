@@ -102,7 +102,10 @@ public class MainActivity extends AppCompatActivity {
                 timerTextView.setText("0s");
                 booleanTextView.setText("Your score is: " + Integer.toString(score) + "/" + Integer.toString(total));
                 playAgain.setVisibility(View.VISIBLE);
-
+                button0.setEnabled(false);
+                button1.setEnabled(false);
+                button2.setEnabled(false);
+                button3.setEnabled(false);
             }
         }.start();
 
@@ -196,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
         startButton.setVisibility(View.INVISIBLE);
         gameConstraintLayout.setVisibility(ConstraintLayout.VISIBLE);
         playAgain(findViewById(R.id.playAgain));
+
 
     }
 
